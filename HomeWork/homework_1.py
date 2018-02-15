@@ -127,11 +127,11 @@ def tail(file_name):
 
     f = open(file_name)
     lines = f.readlines()
-    print(lines[-1])
-    print(lines[-2])
-    print(lines[-3])
-    print(lines[-4])
     print(lines[-5])
+    print(lines[-4])
+    print(lines[-3])
+    print(lines[-2])
+    print(lines[-1])
     f.close()
     
 tail("/Users/rashmithareddy/Desktop/mysql.txt")

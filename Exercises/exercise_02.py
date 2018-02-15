@@ -60,6 +60,8 @@ def count_letters(s):
 
     print(dict)
 
+
+
     """
     returns a dictionary containing each letter in s as a key and
     the number of times each letter has occurred as the value
@@ -110,3 +112,7 @@ first_element([1,2,4,5], 3)
 n_elements([1,2,4,5,5,6], 1, 2)
 count_letters("a a a b b b b c d")
 protein_wight("A C D")
+
+x="abcdefg"
+for i in x.split():
+    print(i)
