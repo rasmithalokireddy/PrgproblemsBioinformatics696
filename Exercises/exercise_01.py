@@ -36,10 +36,14 @@ def percent_decimal(i):
 
 def exponent(integer, power):
 
-    # for x in range (0 , power ):
-        y= 1
+    #
+
+
+
+        # for x in range(0, power):
+        y = 1
         for x in range(0, power):
-          y= y * integer
+            y = y * integer
 
         print (y)
 
@@ -76,6 +80,6 @@ def complement(dna):
     return
 
 hello()
-percent_decimal(0.5)
-exponent(2, 2)
+percent_decimal(5)
+exponent(8, 3)
 complement('F')
