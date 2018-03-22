@@ -111,7 +111,7 @@ def zinc_finger(string):
     :param string: the protein sequence to be searched
     :return: a list of strings
     """
-    return re.findall("[C].{2,3}...[L, I, V, M, F, Y, W, C]........[H].{3,5}[H]", string)
+    return re.findall("[C].{2,4}[C]...[LIVMFYWC]........[H].{3,5}[H]", string)
 
 print(zinc_finger(test_protein))
 # # ['CAACTGTVALALALALHYYTH']
