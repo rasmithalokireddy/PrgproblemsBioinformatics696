@@ -41,44 +41,30 @@ import os
 
 def fasta_folder_to_dict(folder_path):
     dict = {}
-
-
     with open(folder_path, 'r') as infile:
-
-
-     text = infile.read()
-    seqs = text.split('>')
-    for seq in seqs:
+        text = infile.read()
+        seqs = text.split('>')
+        for seq in seqs:
             try:
-
                 x = seq.split('\n', 1)
                 header = x[0]
-
                 sequence = x[1].replace('\n', '')
+                dict[header] = sequence
 
-
-
-                dict[header]=sequence
-
-                 # print(header, sequence)
+                # print(header, sequence)
             except Exception as e:
                 print(e)
                 print(seq)
 
-
-            for key, value in dict.items():
-                if key not in dict.keys():
-                    dict[key]=value
-                    print("already exits")
-                print('Key is: {}\tValue is: {}'.format(key, value))
+    return dict
 
     """
     Constructs a dictionary of all of the FASTA formatted entries from a folder containing FASTA files.
     :param folder_path: string
     :return: dictionary
     """
-    return dict
 
-fasta_folder_to_dict('/Users/rashmithareddy/Desktop/test_files/proper_fasta.fasta')
 
-fasta_folder_to_dict('/Users/rashmithareddy/Desktop/test_files/tricky_fasta.fasta')
+print(fasta_folder_to_dict('/Users/rashmithareddy/Desktop/test_files/proper_fasta.fasta'))
+
+print(fasta_folder_to_dict('/Users/rashmithareddy/Desktop/test_files/tricky_fasta.fasta'))
