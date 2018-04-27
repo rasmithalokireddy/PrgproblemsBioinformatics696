@@ -35,36 +35,72 @@ for key, value in my_dictionary.items():
 
 """
 
-
-
 import os
+import re
 
 def fasta_folder_to_dict(folder_path):
-    dict = {}
-    with open(folder_path, 'r') as infile:
-        text = infile.read()
-        seqs = text.split('>')
-        for seq in seqs:
-            try:
-                x = seq.split('\n', 1)
-                header = x[0]
-                sequence = x[1].replace('\n', '')
-                dict[header] = sequence
 
-                # print(header, sequence)
-            except Exception as e:
-                print(e)
-                print(seq)
+    fasta_dict = {}
+    allowedcharacters = re.compile(r'[^ACTG]')
 
-    return dict
+    for filename in os.listdir(folder_path):
+        if not filename.endswith('.fasta'):
+            continue
+        with open(folder_path +'/'+ filename,'r') as infile:
 
-    """
-    Constructs a dictionary of all of the FASTA formatted entries from a folder containing FASTA files.
-    :param folder_path: string
-    :return: dictionary
-    """
+            entries=infile.read()
+            seqs = entries.split (">")
+            for entry in seqs[1:]:
+                try:
+                  x = entry.split('\n',1)
+                  header = x[0]
+                  sequence= x[1].replace('\n','')
+                  if header in fasta_dict:
+                      if fasta_dict[header]==sequence:
+                          print("a duplicate entry exists for" + header )
+                          continue
+                      else:
+                          print("duplicate headers with non identical sequences were found for" + header)
+                          del new_dict[header]
+                          continue
+                  if sequence=="":
+                      print("empty sequence for" +header)
+                      continue
+                  if not bool(allowedcharacters.search(sequence)):
+                      fasta_dict[header]=sequence
+                  else:
+                      print("protein for" + header)
+
+                except:
+                  print("error")
+                  continue
+    for keys,values in fasta_dict.items():
+        print(keys,"-->",values)
 
 
-print(fasta_folder_to_dict('/Users/rashmithareddy/Desktop/test_files/proper_fasta.fasta'))
+    return
 
-print(fasta_folder_to_dict('/Users/rashmithareddy/Desktop/test_files/tricky_fasta.fasta'))
+
+    #     if header in fasta_dict and seq== fasta_dict[header]:
+    #         print("Duplicate header and sequence for {}".format(header))
+    #
+    #     elif header in fasta_dict:
+    #         print("duplicate header is {}, but non matching sequence". format(header))
+    #         del fasta_dict[header]
+    #         continue
+    #
+    #     # unallowed_charactes=''.join([allowedcharacters[x] if x in allowedcharacters else x for x in fasta_dict])
+    #     # if(len(unallowed_charactes))>0:
+    #     #     print("sequence for entry {} contains unallowed characters : {}".format(header,unallowed_charactes))
+    #     #     continue
+    #
+    #     fasta_dict[header]=seq
+    # return fasta_dict
+
+print(fasta_folder_to_dict('/Users/rashmithareddy/Desktop/test/'))
+    # """
+    # Constructs a dictionary of all of the FASTA formatted entries from a folder containing FASTA files.
+    # :param folder_path: string
+    # :return: dictionary
+    # """
+    # return
