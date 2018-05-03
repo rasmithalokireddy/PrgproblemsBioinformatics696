@@ -24,8 +24,18 @@ Exercise 8
 import sys
 import argparse
 
+def check(**kwargs):
+    input = kwargs['input']
+    for i in input:
+        if type(i)!=type(1):
+            return False
+
+    return True
+
 
 def compute(**kwargs):
+
+ if(check(**kwargs)):
 
     input= kwargs['input']
 
@@ -41,10 +51,13 @@ def compute(**kwargs):
     if (kwargs.get('return_float', False)):
         return float(x)
     return x
+ else:
+     print("input is not integer")
 
 print(compute(input = [0,1,2,3],action='mean', return_float=True))
 print(compute(input = [0,1,2,3],action='sum'))
 print(compute(input = [0,1,2,3],action='sum', return_float=True))
+compute(input = [0,1,'a',3],action='sum', return_float=True)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')

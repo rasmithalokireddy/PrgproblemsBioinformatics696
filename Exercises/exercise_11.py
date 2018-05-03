@@ -55,6 +55,7 @@ def forest_predictor(filepath,classification,**kwargs):
         clf = clf.fit(x, y)
         print(clf.predict(x_test))
 
+
         with open(save, 'wb') as outfile:
             pickle.dump(clf, outfile)
 
@@ -63,6 +64,7 @@ def forest_predictor(filepath,classification,**kwargs):
      else:
             with open(save, 'rb') as infile:
                 clf = pickle.load(infile)
+                print(clf.predict(x_test))
 
 
     return clf
